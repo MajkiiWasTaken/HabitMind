@@ -8,12 +8,17 @@ function Dashboard() {
     const fetchUser = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:5000/api/users/me', {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setUser(response.data);
+        const storedUser = JSON.parse(localStorage.getItem('user'));
+        if (storedUser) {
+          setUser(storedUser); // Use stored user details
+        } else {
+          const response = await axios.get('http://localhost:5000/api/users/me', {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          setUser(response.data);
+        }
       } catch (error) {
-        console.error('Failed to fetch user:', error.response.data.message);
+        console.error('Failed to fetch user:', error.response?.data?.message || error.message);
       }
     };
 
@@ -26,6 +31,7 @@ function Dashboard() {
     <div>
       <h2>Welcome, {user.username}</h2>
       <p>Email: {user.email}</p>
+      <p>Index: {user.index}</p> {/* Display the index */}
     </div>
   );
 }

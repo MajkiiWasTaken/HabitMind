@@ -9,10 +9,13 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    console.log('Logging in user:', { email, password }); // Debugging log
     try {
       const response = await axios.post('http://localhost:5000/api/users/login', { email, password });
+      console.log('Login successful:', response.data); // Debugging log
       localStorage.setItem('token', response.data.token);
-      navigate('/dashboard');
+      localStorage.setItem('user', JSON.stringify(response.data.user)); // Store user details
+      navigate('/dashboard'); // Navigate to the dashboard
     } catch (error) {
       console.error('Login failed:', error.response?.data?.message || error.message);
     }

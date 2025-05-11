@@ -10,45 +10,90 @@ function Register() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    console.log('Registering user:', { username, email, password }); // Debugging log
+    console.log('Registering user:', { username, email, password });
     try {
-      const response = await axios.post('http://localhost:5000/api/users/register', { username, email, password });
-      console.log('Registration successful:', response.data); // Debugging log
-      navigate('/'); // Navigate to the login page after successful registration
+      await axios.post('http://localhost:5000/api/users/register', { username, email, password });
+      console.log('Registration successful');
+      navigate('/');
     } catch (error) {
       console.error('Registration failed:', error.response?.data?.message || error.message);
     }
   };
 
+  const containerStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh',
+    backgroundColor: '#f0f2f5',
+  };
+
+  const formStyle = {
+    backgroundColor: '#fff',
+    padding: '2rem',
+    borderRadius: '8px',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    width: '300px',
+    textAlign: 'center',
+  };
+
+  const inputStyle = {
+    width: '94%',
+    padding: '0.5rem',
+    margin: '0.5rem 0',
+    borderRadius: '4px',
+    border: '1px solid #ccc',
+  };
+
+  const buttonStyle = {
+    width: '100%',
+    padding: '0.5rem',
+    backgroundColor: '#28a745',
+    color: '#fff',
+    border: 'none',
+    borderRadius: '4px',
+    cursor: 'pointer',
+  };
+
+  const linkStyle = {
+    color: '#007bff',
+    textDecoration: 'none',
+  };
+
   return (
-    <form onSubmit={handleRegister}>
-      <h2>Register</h2>
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        required
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-      <button type="submit">Register</button>
-      <p>
-        Already have an account? <Link to="/">Login here</Link>
-      </p>
-    </form>
+    <div style={containerStyle}>
+      <form onSubmit={handleRegister} style={formStyle}>
+        <h2>Register</h2>
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          style={inputStyle}
+          required
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          style={inputStyle}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          style={inputStyle}
+          required
+        />
+        <button type="submit" style={buttonStyle}>Register</button>
+        <p>
+          Already have an account? <Link to="/" style={linkStyle}>Login here</Link>
+        </p>
+      </form>
+    </div>
   );
 }
 

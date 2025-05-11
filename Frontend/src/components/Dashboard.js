@@ -31,7 +31,6 @@ function Dashboard() {
     <div>
       <h2>Welcome, {user.username}</h2>
       <p>Email: {user.email}</p>
-      <p>Index: {user.index}</p> {/* Display the index */}
     </div>
   );
 }

@@ -3,15 +3,15 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 
 function Login() {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState(''); // Changed to lowercase 'username'
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log('Logging in user:', { email, password }); // Debugging log
+    console.log('Logging in user:', { username, password }); // Debugging log
     try {
-      const response = await axios.post('http://localhost:5000/api/users/login', { email, password });
+      const response = await axios.post('http://localhost:5000/api/users/login', { username, password }); // Changed to lowercase 'username'
       console.log('Login successful:', response.data); // Debugging log
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.user)); // Store user details
@@ -25,10 +25,10 @@ function Login() {
     <form onSubmit={handleLogin}>
       <h2>Login</h2>
       <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        type="text" // Changed type to 'text'
+        placeholder="Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
         required
       />
       <input

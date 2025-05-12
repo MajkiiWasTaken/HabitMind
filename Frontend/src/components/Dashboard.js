@@ -40,9 +40,10 @@ function Dashboard() {
   const containerStyle = {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
     height: '100vh',
+    padding: '1rem',
     backgroundColor: darkMode ? '#121212' : '#f0f2f5',
     color: darkMode ? '#ffffff' : '#000000',
     fontFamily: 'Arial, sans-serif',
@@ -50,33 +51,19 @@ function Dashboard() {
   };
 
   const cardStyle = {
-    backgroundColor: darkMode ? '#1e1e1e' : '#fff',
-    padding: '2rem',
+    backgroundColor: darkMode ? '#2e2e2e' : '#fff',
+    padding: '1rem',
     borderRadius: '8px',
     boxShadow: darkMode ? '0 4px 6px rgba(0, 0, 0, 0.5)' : '0 4px 6px rgba(0, 0, 0, 0.1)',
-    textAlign: 'center',
-    width: '300px',
+    textAlign: 'left',
+    width: 'auto',
     transition: 'background-color 0.3s, box-shadow 0.3s',
   };
 
   const headingStyle = {
-    marginBottom: '1rem',
+    margin: 0,
     color: darkMode ? '#ffffff' : '#333',
-  };
-
-  const textStyle = {
-    margin: '0.5rem 0',
-    color: darkMode ? '#cccccc' : '#555',
-  };
-
-  const buttonStyle = {
-    marginTop: '1rem',
-    padding: '0.5rem 1rem',
-    backgroundColor: darkMode ? '#007bff' : '#007bff',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
+    fontSize: '2.5rem',
   };
 
   const toggleButtonStyle = {
@@ -92,10 +79,14 @@ function Dashboard() {
     transition: 'background-color 0.3s, color 0.3s',
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    window.location.href = '/';
+  const buttonStyle = {
+    padding: '0.5rem 1rem',
+    backgroundColor: darkMode ? '#007bff' : '#007bff',
+    color: '#fff',
+    border: 'none',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s, color 0.3s',
   };
 
   return (
@@ -105,10 +96,6 @@ function Dashboard() {
       </button>
       <div style={cardStyle}>
         <h2 style={headingStyle}>Welcome, {user.username}</h2>
-        <p style={textStyle}>Email: {user.email}</p>
-        <button style={buttonStyle} onClick={handleLogout}>
-          Logout
-        </button>
       </div>
     </div>
   );

@@ -1,11 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [darkMode, setDarkMode] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+    setDarkMode(savedDarkMode); // Load dark mode state from localStorage
+  }, []);
+
+  const toggleDarkMode = () => {
+    const newDarkMode = !darkMode;
+    setDarkMode(newDarkMode);
+    localStorage.setItem('darkMode', newDarkMode); // Save dark mode state to localStorage
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -26,16 +38,19 @@ function Login() {
     justifyContent: 'center',
     alignItems: 'center',
     height: '100vh',
-    backgroundColor: '#f0f2f5',
+    backgroundColor: darkMode ? '#121212' : '#f0f2f5',
+    color: darkMode ? '#ffffff' : '#000000',
+    transition: 'background-color 0.3s, color 0.3s',
   };
 
   const formStyle = {
-    backgroundColor: '#fff',
+    backgroundColor: darkMode ? '#1e1e1e' : '#fff',
     padding: '2rem',
     borderRadius: '8px',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    boxShadow: darkMode ? '0 4px 6px rgba(0, 0, 0, 0.5)' : '0 4px 6px rgba(0, 0, 0, 0.1)',
     width: '300px',
     textAlign: 'center',
+    transition: 'background-color 0.3s, box-shadow 0.3s',
   };
 
   const inputStyle = {
@@ -57,12 +72,28 @@ function Login() {
   };
 
   const linkStyle = {
-    color: '#007bff',
+    color: darkMode ? '#4da6ff' : '#007bff',
     textDecoration: 'none',
+  };
+
+  const toggleButtonStyle = {
+    position: 'absolute',
+    top: '1rem',
+    right: '1rem',
+    padding: '0.5rem 1rem',
+    backgroundColor: darkMode ? '#444' : '#ddd',
+    color: darkMode ? '#fff' : '#000',
+    border: 'none',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s, color 0.3s',
   };
 
   return (
     <div style={containerStyle}>
+      <button style={toggleButtonStyle} onClick={toggleDarkMode}>
+        {darkMode ? 'Light Mode' : 'Dark Mode'}
+      </button>
       <form onSubmit={handleLogin} style={formStyle}>
         <h2>Login</h2>
         <input

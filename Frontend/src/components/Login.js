@@ -89,12 +89,19 @@ function Login() {
     transition: 'background-color 0.3s, color 0.3s',
   };
 
+  const photoStyle = {
+    width: '25%',
+    height: 'auto',
+    borderRadius: '8px',
+  };
+
   return (
     <div style={containerStyle}>
       <button style={toggleButtonStyle} onClick={toggleDarkMode}>
         {darkMode ? 'Light Mode' : 'Dark Mode'}
       </button>
       <form onSubmit={handleLogin} style={formStyle}>
+        <img src="/habitmind.jpg" alt="photo" style={photoStyle} />
         <h2>Login</h2>
         <input
           type="text"

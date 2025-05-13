@@ -1,34 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 
-function Dashboard() {
-  const [user, setUser] = useState(null);
+function Profile() {
   const [darkMode, setDarkMode] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const savedDarkMode = localStorage.getItem('darkMode') === 'true';
     setDarkMode(savedDarkMode); // Load dark mode state from localStorage
-
-    const fetchUser = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const storedUser = JSON.parse(localStorage.getItem('user'));
-        if (storedUser) {
-          setUser(storedUser); // Use stored user details
-        } else {
-          const response = await axios.get('http://localhost:5000/api/users/me', {
-            headers: { Authorization: `Bearer ${token}` },
-          });
-          setUser(response.data);
-        }
-      } catch (error) {
-        console.error('Failed to fetch user:', error.response?.data?.message || error.message);
-      }
-    };
-
-    fetchUser();
   }, []);
 
   const toggleDarkMode = () => {
@@ -37,15 +14,12 @@ function Dashboard() {
     localStorage.setItem('darkMode', newDarkMode); // Save dark mode state to localStorage
   };
 
-  if (!user) return <p>Loading...</p>;
-
   const containerStyle = {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
+    alignItems: 'center',
+    justifyContent: 'center',
     height: '100vh',
-    padding: '1rem',
     backgroundColor: darkMode ? '#121212' : '#f0f2f5',
     color: darkMode ? '#ffffff' : '#000000',
     fontFamily: 'Arial, sans-serif',
@@ -54,20 +28,12 @@ function Dashboard() {
 
   const cardStyle = {
     backgroundColor: darkMode ? '#2e2e2e' : '#fff',
-    padding: '1rem',
+    padding: '2rem',
     borderRadius: '8px',
     boxShadow: darkMode ? '0 4px 6px rgba(0, 0, 0, 0.5)' : '0 4px 6px rgba(0, 0, 0, 0.1)',
-    textAlign: 'left',
-    width: 'auto',
+    textAlign: 'center',
+    width: '300px',
     transition: 'background-color 0.3s, box-shadow 0.3s',
-    marginBottom: '1rem',
-    cursor: 'pointer',
-  };
-
-  const headingStyle = {
-    margin: 0,
-    color: darkMode ? '#ffffff' : '#333',
-    fontSize: '2rem',
   };
 
   const toggleButtonStyle = {
@@ -83,23 +49,19 @@ function Dashboard() {
     transition: 'background-color 0.3s, color 0.3s',
   };
 
-  const handleProfileClick = () => {
-    navigate('/profile'); // Navigate to the profile page
-  };
-
   return (
     <div style={containerStyle}>
       <button style={toggleButtonStyle} onClick={toggleDarkMode}>
         {darkMode ? 'Light Mode' : 'Dark Mode'}
       </button>
       <div style={cardStyle}>
-        <h2 style={headingStyle}>Welcome, {user.username}</h2>
-      </div>
-      <div style={cardStyle} onClick={handleProfileClick}>
-        <h3>Profile</h3>
+        <h2>Profile Page</h2>
+        <p>Profile photo placeholder</p>
+        <p>Stats placeholder</p>
+        <p>Other details placeholder</p>
       </div>
     </div>
   );
 }
 
-export default Dashboard;
+export default Profile;

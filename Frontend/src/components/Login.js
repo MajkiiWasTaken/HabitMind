@@ -69,6 +69,7 @@ function Login() {
     border: 'none',
     borderRadius: '4px',
     cursor: 'pointer',
+    margin: '0.5rem 0',
   };
 
   const linkStyle = {

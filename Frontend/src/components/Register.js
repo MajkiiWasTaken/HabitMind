@@ -68,6 +68,7 @@ function Register() {
     border: 'none',
     borderRadius: '4px',
     cursor: 'pointer',
+    margin: '0.5rem 0',
   };
 
   const linkStyle = {
@@ -88,12 +89,19 @@ function Register() {
     transition: 'background-color 0.3s, color 0.3s',
   };
 
+  const photoStyle = {
+    width: '25%',
+    height: 'auto',
+    borderRadius: '8px',
+  };
+
   return (
     <div style={containerStyle}>
       <button style={toggleButtonStyle} onClick={toggleDarkMode}>
         {darkMode ? 'Light Mode' : 'Dark Mode'}
       </button>
       <form onSubmit={handleRegister} style={formStyle}>
+        <img src="/habitmind.jpg" alt="photo" style={photoStyle} />
         <h2>Register</h2>
         <input
           type="text"

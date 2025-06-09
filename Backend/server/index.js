@@ -10,6 +10,7 @@ app.use(cors()); // Enable CORS
 app.use(express.json());
 
 app.use('/api/users', require('./routes/userRoutes'));
+app.use('/api/payment', require('./routes/paymentRoutes'));
 //app.use('/api/tasks', require('./routes/taskRoutes'));
 //app.use('/api/ai', require('./routes/aiRoutes'));
 

@@ -61,6 +61,18 @@ function Dashboard() {
     width: 'auto',
     transition: 'background-color 0.3s, box-shadow 0.3s',
     marginBottom: '1rem',
+  };
+
+  const profileCardStyle = {
+    ...cardStyle,
+    height: '2rem',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '0.5rem 1rem',
+    minWidth: '70px',
+    width: 'fit-content',
+    marginBottom: 0,
     cursor: 'pointer',
   };
 
@@ -95,8 +107,8 @@ function Dashboard() {
       <div style={cardStyle}>
         <h2 style={headingStyle}>Welcome, {user.username}</h2>
       </div>
-      <div style={cardStyle} onClick={handleProfileClick}>
-        <h3>Profile</h3>
+      <div style={profileCardStyle} onClick={handleProfileClick}>
+        <h3 style={{ margin: 0, fontSize: '1rem', pointerEvents: 'none' }}>Profile</h3>
       </div>
     </div>
   );

@@ -42,7 +42,7 @@ function Dashboard() {
   const containerStyle = {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'flex-start',
+    alignItems: 'flex-start', // Align all content to the left
     justifyContent: 'flex-start',
     height: '100vh',
     padding: '1rem',
@@ -50,6 +50,7 @@ function Dashboard() {
     color: darkMode ? '#ffffff' : '#000000',
     fontFamily: 'Arial, sans-serif',
     transition: 'background-color 0.3s, color 0.3s',
+    position: 'relative',
   };
 
   const cardStyle = {
@@ -82,6 +83,28 @@ function Dashboard() {
     fontSize: '2rem',
   };
 
+  const goPremiumButtonStyle = {
+    padding: '0.8rem 2rem',
+    backgroundColor: '#007bff',
+    color: '#fff',
+    border: 'none',
+    borderRadius: '6px',
+    cursor: 'pointer',
+    fontWeight: 'bold',
+    fontSize: '1.2rem',
+    minWidth: '120px',
+    position: 'absolute',
+    top: '1rem',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    margin: 0,
+    display: 'block',
+    transition: 'background-color 0.3s, color 0.3s',
+    zIndex: 11,
+    marginLeft: 0, // Remove auto margin so button stays centered in absolute position
+    marginRight: 0,
+  };
+
   const toggleButtonStyle = {
     position: 'absolute',
     top: '1rem',
@@ -93,6 +116,7 @@ function Dashboard() {
     borderRadius: '4px',
     cursor: 'pointer',
     transition: 'background-color 0.3s, color 0.3s',
+    zIndex: 12,
   };
 
   const handleProfileClick = () => {
@@ -101,6 +125,14 @@ function Dashboard() {
 
   return (
     <div style={containerStyle}>
+      <button
+        style={goPremiumButtonStyle}
+        onClick={() => {
+          window.location.href = "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YOUR_BUTTON_ID";
+        }}
+      >
+        Go Premium
+      </button>
       <button style={toggleButtonStyle} onClick={toggleDarkMode}>
         {darkMode ? 'Light Mode' : 'Dark Mode'}
       </button>
@@ -108,7 +140,7 @@ function Dashboard() {
         <h2 style={headingStyle}>Welcome, {user.username}</h2>
       </div>
       <div style={profileCardStyle} onClick={handleProfileClick}>
-        <h3 style={{ margin: 0, fontSize: '1rem', pointerEvents: 'none' }}>Profile</h3>
+        <h3 style={{ margin: 0, fontSize: '1rem' }}>Profile</h3>
       </div>
     </div>
   );

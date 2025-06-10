@@ -6,6 +6,7 @@ function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [darkMode, setDarkMode] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,6 +22,7 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setError(''); // Clear previous error
     console.log('Logging in user:', { username, password });
     try {
       const response = await axios.post('http://localhost:5000/api/users/login', { username, password });
@@ -29,6 +31,7 @@ function Login() {
       localStorage.setItem('user', JSON.stringify(response.data.user));
       navigate('/dashboard');
     } catch (error) {
+      setError('Wrong credentials');
       console.error('Login failed:', error.response?.data?.message || error.message);
     }
   };
@@ -104,6 +107,11 @@ function Login() {
       <form onSubmit={handleLogin} style={formStyle}>
         <img src="/habitmind.jpg" alt="photo" style={photoStyle} />
         <h2>Login</h2>
+        {error && (
+          <div style={{ color: 'red', marginBottom: '0.5rem', fontWeight: 500 }}>
+            {error}
+          </div>
+        )}
         <input
           type="text"
           placeholder="Username"

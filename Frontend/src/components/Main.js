@@ -155,7 +155,8 @@ function Main() {
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
+    alignItems: 'flex-start', // Move boxes to the left
+    paddingLeft: '2rem',      // Add some left padding for spacing
   };
 
 
